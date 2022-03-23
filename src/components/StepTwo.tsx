@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { FORM_FIELDS } from "../constants";
 import saveFormDataInLocalStorage from "../util/saveFormDataInLocalStorage";
 import Button from "./Button";
 
@@ -23,16 +24,22 @@ const StepTwo = ({ onNextStepClick, onPreviousStepClick }: StepTwoProps) => {
     const data = localStorage.getItem("formData");
     if (data) {
       const formData = JSON.parse(data);
-      setValue("email", formData.email);
-      setValue("phone", formData.phone);
+      setValue(FORM_FIELDS.EMAIL, formData.email);
+      setValue(FORM_FIELDS.PHONE, formData.phone);
     }
   }, []);
   return (
     <>
       Step 2
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input type="email" {...register("email", { required: true })} />
-        <input type="number" {...register("phone", { required: true })} />
+        <input
+          type="email"
+          {...register(FORM_FIELDS.EMAIL, { required: true })}
+        />
+        <input
+          type="number"
+          {...register(FORM_FIELDS.PHONE, { required: true })}
+        />
         <Button
           type="button"
           onClick={onPreviousStepClick}

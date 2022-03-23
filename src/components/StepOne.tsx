@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { FORM_FIELDS } from "../constants";
 import saveFormDataInLocalStorage from "../util/saveFormDataInLocalStorage";
 import Button from "./Button";
 
@@ -8,14 +9,10 @@ type StepOneProps = {
   onPreviousStepClick: () => void;
 };
 
-type FormData = {
-  [fieldName: string]: string;
-};
-
 const StepOne = ({ onNextStepClick, onPreviousStepClick }: StepOneProps) => {
   const { register, handleSubmit, setValue } = useForm();
 
-  const onSubmit = (formData: FormData): void => {
+  const onSubmit = (formData: { [fieldName: string]: string }): void => {
     saveFormDataInLocalStorage(formData, onNextStepClick);
   };
 
@@ -23,8 +20,8 @@ const StepOne = ({ onNextStepClick, onPreviousStepClick }: StepOneProps) => {
     const data = localStorage.getItem("formData");
     if (data) {
       const formData = JSON.parse(data);
-      setValue("name", formData.name);
-      setValue("lastName", formData.lastName);
+      setValue(FORM_FIELDS.NAME, formData.name);
+      setValue(FORM_FIELDS.LAST_NAME, formData.lastName);
     }
   }, []);
 
@@ -32,8 +29,8 @@ const StepOne = ({ onNextStepClick, onPreviousStepClick }: StepOneProps) => {
     <>
       Step 1
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("name", { required: true })} />
-        <input {...register("lastName", { required: true })} />
+        <input {...register(FORM_FIELDS.NAME, { required: true })} />
+        <input {...register(FORM_FIELDS.LAST_NAME, { required: true })} />
         <Button
           type="button"
           onClick={onPreviousStepClick}
