@@ -1,4 +1,5 @@
 import Button from "./Button";
+import Header from "./Header";
 
 type BonusProps = {
   onNextStepClick: () => void;
@@ -7,7 +8,7 @@ type BonusProps = {
 const Bonus = ({ onNextStepClick }: BonusProps) => {
   return (
     <>
-      Bonus Page
+      <Header title="Bonus Page" text="You are on the bonus page" />
       <Button onClick={onNextStepClick} text="Next Step" />
     </>
   );

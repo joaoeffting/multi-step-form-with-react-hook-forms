@@ -11,3 +11,10 @@ export const FORM_FIELDS = {
   EMAIL: "email",
   PHONE: "phone",
 };
+
+export const COLORS = {
+  color1: "#610F7F",
+  color2: "#9C528B",
+  color3: "#E2C2C6",
+  color4: "#EBE1E2",
+};

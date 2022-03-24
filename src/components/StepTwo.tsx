@@ -3,6 +3,10 @@ import { useForm } from "react-hook-form";
 import { FORM_FIELDS } from "../constants";
 import saveFormDataInLocalStorage from "../util/saveFormDataInLocalStorage";
 import Button from "./Button";
+import Form from "./Form";
+import Header from "./Header";
+import Box from "./layout/Box";
+import SubmitButton from "./SubmitButton";
 
 type StepTwoProps = {
   onNextStepClick: () => void;
@@ -29,25 +33,31 @@ const StepTwo = ({ onNextStepClick, onPreviousStepClick }: StepTwoProps) => {
     }
   }, []);
   return (
-    <>
-      Step 2
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="email"
-          {...register(FORM_FIELDS.EMAIL, { required: true })}
-        />
-        <input
-          type="number"
-          {...register(FORM_FIELDS.PHONE, { required: true })}
-        />
+    <Box>
+      <Header title="Step 2" text="We are almost there" />
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Box>
+          <label>E-mail</label>
+          <input
+            type="email"
+            {...register(FORM_FIELDS.EMAIL, { required: true })}
+          />
+        </Box>
+        <Box>
+          <label>Phone</label>
+          <input
+            type="number"
+            {...register(FORM_FIELDS.PHONE, { required: true })}
+          />
+        </Box>
         <Button
           type="button"
           onClick={onPreviousStepClick}
           text="Previous Step"
         />
-        <button type="submit">Next Step</button>
-      </form>
-    </>
+        <SubmitButton>Next Step</SubmitButton>
+      </Form>
+    </Box>
   );
 };
 
